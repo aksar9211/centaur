@@ -1,0 +1,252 @@
+/* ============================================================
+   CENTAUR — Design System
+   Single source of truth. Swap the :root block to honor an
+   incoming design-direction token file; nothing below hardcodes.
+   ============================================================ */
+
+:root {
+  /* ---- Color · cool neutral base ---------------------------- */
+  --bg:        oklch(0.985 0.004 255);   /* page */
+  --surface:   oklch(0.968 0.005 255);   /* cards, panels */
+  --surface-2: oklch(0.945 0.007 255);   /* recessed wells */
+  --line:      oklch(0.895 0.008 255);   /* hairlines */
+  --line-2:    oklch(0.840 0.010 255);   /* stronger dividers */
+
+  --ink:       oklch(0.205 0.022 265);   /* primary text */
+  --ink-2:     oklch(0.430 0.020 265);   /* secondary text */
+  --ink-3:     oklch(0.585 0.016 265);   /* tertiary / captions */
+
+  /* ---- Ink (dark) instrument surface ------------------------ */
+  --night:     oklch(0.205 0.028 265);   /* deep slate panel */
+  --night-2:   oklch(0.255 0.030 265);   /* raised on night */
+  --night-line:oklch(0.330 0.030 265);
+  --on-night:  oklch(0.965 0.006 255);
+  --on-night-2:oklch(0.760 0.018 265);
+  --on-night-3:oklch(0.600 0.022 265);
+
+  /* ---- Accent · ONE accent, reserved for state changes ------ */
+  /* Spec guardrail: two-color floor (paper + ink) plus a single
+     accent. Categories are NOT color-coded; form & weight carry
+     the distinction. The accent appears only on state changes:
+     the live reading marker, focus rings, primary action, the
+     verdict moment, an active toggle. */
+  --accent:        oklch(0.585 0.165 268);  /* instrument indigo */
+  --accent-strong: oklch(0.505 0.175 268);
+  --accent-tint:   oklch(0.955 0.028 268);
+  --accent-lit:    oklch(0.700 0.165 268);  /* on dark surfaces */
+
+  /* back-compat aliases (older pages reference --brand*) */
+  --brand:        var(--accent);
+  --brand-strong: var(--accent-strong);
+  --brand-tint:   var(--accent-tint);
+  --brand-lit:    var(--accent-lit);
+
+  /* neutral scale tones — the weight/position indicator lives in
+     ink only; “you hold” vs “AI holds” read by form, not color */
+  --scale-track: oklch(0.915 0.008 255);
+  --scale-fill:  oklch(0.640 0.018 265);
+  --weight:      var(--ink);
+
+  /* ---- Type ------------------------------------------------- */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans:  "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* fluid display scale */
+  --t-hero:  clamp(2.9rem, 1.6rem + 5.4vw, 6.2rem);
+  --t-h1:    clamp(2.2rem, 1.4rem + 3.0vw, 3.9rem);
+  --t-h2:    clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem);
+  --t-h3:    clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --t-lead:  clamp(1.12rem, 1.0rem + 0.5vw, 1.4rem);
+  --t-body:  1.0625rem;
+  --t-sm:    0.9375rem;
+  --t-xs:    0.8125rem;
+  --t-mono:  0.78rem;
+
+  /* ---- Space / radius / shadow ------------------------------ */
+  --r-sm: 6px;
+  --r:    12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --shadow-sm: 0 1px 2px oklch(0.2 0.02 265 / 0.05), 0 1px 1px oklch(0.2 0.02 265 / 0.04);
+  --shadow:    0 4px 18px oklch(0.2 0.02 265 / 0.07), 0 1px 3px oklch(0.2 0.02 265 / 0.05);
+  --shadow-lg: 0 24px 64px oklch(0.2 0.03 265 / 0.14), 0 6px 18px oklch(0.2 0.03 265 / 0.08);
+  --shadow-night: 0 30px 80px oklch(0.12 0.04 265 / 0.55);
+
+  --maxw: 1200px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ============================================================
+   Reset / base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv01";
+}
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+::selection { background: oklch(0.585 0.165 268 / 0.18); }
+
+h1, h2, h3, h4 { line-height: 1.08; font-weight: 500; letter-spacing: -0.02em; }
+p { text-wrap: pretty; }
+
+/* ============================================================
+   Reusable type helpers
+   ============================================================ */
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; }
+.serif-it { font-family: var(--serif); font-style: italic; font-weight: 400; }
+.mono { font-family: var(--mono); }
+
+.kicker {
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 500;
+}
+.kicker.brand { color: var(--brand-strong); }
+
+.lead { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-2); }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 56px); }
+.wrap-narrow { max-width: 780px; }
+section { position: relative; }
+.divider { height: 1px; background: var(--line); border: 0; }
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-sm);
+  letter-spacing: -0.01em;
+  padding: 0.72em 1.25em; border-radius: 999px;
+  border: 1px solid transparent;
+  transition: transform 0.18s var(--ease), background 0.18s var(--ease),
+              border-color 0.18s var(--ease), color 0.18s var(--ease);
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--brand-strong); }
+.btn-ghost { border-color: var(--line-2); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); background: var(--surface); }
+.btn-lg { padding: 0.9em 1.6em; font-size: var(--t-body); }
+.btn .arrow { transition: transform 0.18s var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* ============================================================
+   Chips / badges / tags
+   ============================================================ */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  font-family: var(--mono); font-size: var(--t-mono);
+  letter-spacing: 0.04em;
+  padding: 0.34em 0.7em; border-radius: 999px;
+  border: 1px solid var(--line-2); color: var(--ink-2);
+  background: var(--surface);
+}
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
+/* Categories are not color-coded (spec). Chips stay neutral ink;
+   the accent is reserved for the active/state-change chip only. */
+.chip.active { color: var(--accent-strong); border-color: oklch(0.84 0.07 268); background: var(--accent-tint); }
+.chip.active .dot { background: var(--accent); }
+.chip.brand { color: var(--accent-strong); border-color: oklch(0.84 0.07 268); background: var(--accent-tint); }
+.chip.brand .dot { background: var(--accent); }
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: clamp(20px, 3vw, 32px);
+}
+
+/* ============================================================
+   Logo / wordmark
+   ============================================================ */
+.logo { display: inline-flex; align-items: center; gap: 0.55em; color: var(--ink); }
+.logo .mark { width: 1.45em; height: 1.45em; flex: none; }
+.logo .word {
+  font-family: var(--serif); font-weight: 500; font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+/* The Centaur mark: an instrument dial. An ink ring with a single
+   accent pip marking the reading. Primitives only — no illustration.
+   (Two semicircle arcs both ink => one continuous ink ring.) */
+.mark .ring { fill: none; stroke: var(--line-2); stroke-width: 2.4; }
+.mark .arc-off { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+.mark .arc-enh { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+.mark .pip { fill: var(--accent); }
+
+/* ============================================================
+   Site nav
+   ============================================================ */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: oklch(0.985 0.004 255 / 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.nav-links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+.nav-links a.navlink { font-size: var(--t-sm); color: var(--ink-2); font-weight: 500; transition: color 0.16s; }
+.nav-links a.navlink:hover { color: var(--ink); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+@media (max-width: 760px) { .nav-links .navlink { display: none; } }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer { background: var(--night); color: var(--on-night-2); padding: clamp(48px, 7vw, 88px) 0 40px; }
+.footer a { color: var(--on-night-2); transition: color 0.16s; }
+.footer a:hover { color: var(--on-night); }
+.footer .logo { color: var(--on-night); }
+.footer .mark .ring { stroke: var(--night-line); }
+
+/* ============================================================
+   Signal meter (shared between landing demo + product + brand)
+   A horizontal spectrum: offload (left) → enhance (right)
+   ============================================================ */
+.signal-track {
+  position: relative; height: 8px; border-radius: 999px;
+  background: var(--scale-track); border: 1px solid var(--line);
+}
+.signal-track.thin { height: 6px; }
+.signal-needle {
+  position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 3px;
+  background: var(--accent); transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 0 4px var(--bg);
+  transition: left 0.6s var(--ease);
+}
+.signal-track.on-night { background: var(--night-2); border-color: var(--night-line); }
+.signal-track.on-night .signal-needle { background: var(--accent-lit); box-shadow: 0 0 0 4px var(--night); }
+
+/* reveal-on-scroll */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* utility */
+.u-center { text-align: center; }
+.eyebrow-row { display: flex; align-items: center; gap: 12px; }
+.hr-num { font-family: var(--mono); font-size: var(--t-mono); color: var(--ink-3); }
