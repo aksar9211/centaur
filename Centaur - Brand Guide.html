@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Centaur · Brand Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/centaur.css" />
+<style>
+html { background: var(--bg); }
+.bg-wrap { display: grid; grid-template-columns: 240px 1fr; max-width: 1320px; margin-inline: auto; }
+@media (max-width: 920px) { .bg-wrap { grid-template-columns: 1fr; } }
+
+.toc { position: sticky; top: 0; height: 100vh; padding: 40px 24px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 920px) { .toc { display: none; } }
+.toc .logo { margin-bottom: 30px; }
+.toc a { font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-3); padding: 7px 0; letter-spacing: 0.02em; transition: color 0.14s; }
+.toc a:hover, .toc a.on { color: var(--ink); }
+.toc .num { color: var(--accent-strong); margin-right: 8px; }
+.toc .back { margin-top: auto; color: var(--ink-2); }
+
+.doc { padding: clamp(40px, 6vw, 88px) clamp(24px, 5vw, 80px); max-width: 980px; }
+.bg-sec { padding: clamp(40px, 6vw, 80px) 0; border-top: 1px solid var(--line); }
+.bg-sec:first-of-type { border-top: 0; padding-top: 0; }
+.sec-num { font-family: var(--mono); font-size: var(--t-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-strong); }
+.bg-sec h2 { font-family: var(--serif); font-weight: 400; font-size: var(--t-h1); margin: 14px 0 0; }
+.bg-sec h2 em { font-style: italic; color: var(--accent-strong); }
+.bg-sec .intro { font-size: var(--t-lead); color: var(--ink-2); margin-top: 16px; max-width: 62ch; }
+.sub { font-family: var(--mono); font-size: var(--t-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 40px 0 16px; }
+
+.cover .mega { font-family: var(--serif); font-weight: 400; font-size: clamp(3.4rem, 1.5rem + 8vw, 8rem); letter-spacing: -0.04em; line-height: 0.9; }
+.cover .meta { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 32px; font-family: var(--mono); font-size: var(--t-mono); color: var(--ink-3); letter-spacing: 0.04em; }
+.cover .meta b { color: var(--ink); font-weight: 500; }
+.cover .tagline { font-family: var(--serif); font-style: italic; font-size: var(--t-h2); color: var(--ink-2); margin-top: 28px; max-width: 24ch; }
+
+.logo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 680px) { .logo-row { grid-template-columns: 1fr; } }
+.logo-tile { border: 1px solid var(--line); border-radius: var(--r-lg); display: grid; place-items: center; min-height: 220px; }
+.logo-tile.light { background: var(--surface); }
+.logo-tile.dark { background: var(--night); }
+.logo-tile.dark .logo { color: var(--on-night); }
+.logo-tile.dark .mark .arc-off, .logo-tile.dark .mark .arc-enh { stroke: var(--on-night); }
+.logo-tile.dark .mark .pip { fill: var(--accent-lit); }
+.logo-tile .logo .word { font-size: 2rem; }
+.logo-tile .logo .mark { width: 2.6rem; height: 2.6rem; }
+.cap { font-family: var(--mono); font-size: var(--t-mono); color: var(--ink-3); margin-top: 12px; }
+
+.mark-detail { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: center; margin-top: 22px; }
+@media (max-width: 680px) { .mark-detail { grid-template-columns: 1fr; } }
+.mark-big { width: 180px; height: 180px; }
+.mark-notes p { font-size: var(--t-sm); color: var(--ink-2); margin-bottom: 12px; }
+.mark-notes .lg { color: var(--accent); }
+
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 760px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+.sw-card { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.sw-chip { height: 92px; }
+.sw-body { padding: 12px 13px 14px; }
+.sw-name { font-size: var(--t-sm); font-weight: 600; }
+.sw-tok { font-family: var(--mono); font-size: 11px; color: var(--ink-2); margin-top: 3px; }
+.sw-role { font-size: var(--t-xs); color: var(--ink-3); margin-top: 6px; }
+.note { font-size: var(--t-sm); color: var(--ink-2); background: var(--accent-tint); border: 1px solid oklch(0.86 0.06 268); border-radius: var(--r); padding: 14px 16px; margin-top: 20px; }
+.note b { color: var(--accent-strong); }
+
+.type-fam { display: grid; grid-template-columns: 160px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+@media (max-width: 680px) { .type-fam { grid-template-columns: 1fr; gap: 10px; } }
+.type-fam:first-of-type { border-top: 0; }
+.tf-meta .nm { font-size: 1.05rem; font-weight: 600; }
+.tf-meta .role { font-family: var(--mono); font-size: var(--t-mono); color: var(--ink-3); margin-top: 4px; }
+.tf-spec .big { line-height: 1; letter-spacing: -0.01em; }
+.tf-spec .row { font-size: var(--t-xs); color: var(--ink-3); font-family: var(--mono); margin-top: 10px; }
+
+.scale-list { display: flex; flex-direction: column; gap: 2px; }
+.scale-item { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+.scale-item .tag { font-family: var(--mono); font-size: var(--t-mono); color: var(--ink-3); }
+.scale-item .ex { color: var(--ink); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/* category scale (matches the app instrument) */
+.cat-demo { border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 40px); background: var(--surface); margin-top: 8px; }
+.cat-poles { display: flex; justify-content: space-between; font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-3); }
+.cat-track { position: relative; height: 2px; background: var(--scale-track); margin: 26px 0; }
+.cat-track .notch { position: absolute; top: -4px; width: 1px; height: 10px; background: var(--line-2); transform: translateX(-50%); }
+.cat-track .weight { position: absolute; top: 50%; left: 50%; width: 22px; height: 22px; background: var(--accent); border-radius: 4px; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 5px var(--surface), var(--shadow-sm); }
+.cat-ticks { position: relative; height: 18px; }
+.cat-ticks span { position: absolute; transform: translateX(-50%); font-family: var(--mono); font-size: var(--t-xs); color: var(--ink-3); }
+.cat-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin-top: 22px; }
+@media (max-width: 700px) { .cat-defs { grid-template-columns: 1fr; } }
+.cat-def { background: var(--bg); padding: 22px; }
+.cat-def .mini { position: relative; width: 110px; height: 14px; margin-bottom: 14px; }
+.cat-def .mini .mt { position: absolute; top: 50%; left: 0; right: 0; height: 1.5px; background: var(--scale-track); transform: translateY(-50%); }
+.cat-def .mini .mw { position: absolute; top: 50%; width: 9px; height: 9px; background: var(--accent); border-radius: 2px; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 3px var(--bg); }
+.cat-def h4 { font-family: var(--serif); font-weight: 500; font-size: var(--t-h3); margin-bottom: 6px; }
+.cat-def p { font-size: var(--t-sm); color: var(--ink-2); }
+
+/* drift demo */
+.drift-demo { border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 40px); background: var(--surface); margin-top: 8px; max-width: 460px; }
+.drift-demo .k { font-family: var(--mono); font-size: var(--t-mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+.drift-demo .n { font-family: var(--serif); font-weight: 400; font-size: clamp(3.5rem, 2rem + 7vw, 5.5rem); line-height: 0.9; letter-spacing: -0.04em; margin: 10px 0; }
+.drift-demo .s { font-size: var(--t-lead); color: var(--ink-2); }
+
+.comp { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; margin-top: 16px; }
+.comp .lbl { font-family: var(--mono); font-size: var(--t-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; }
+.comp .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.field { display: flex; flex-direction: column; gap: 6px; max-width: 320px; }
+.field label { font-size: var(--t-xs); color: var(--ink-2); font-weight: 500; }
+.field input { padding: 0.7em 0.9em; border: 1px solid var(--line-2); border-radius: var(--r-sm); background: var(--bg); transition: border-color 0.15s; }
+.field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
+.switch { width: 46px; height: 27px; border-radius: 999px; background: var(--scale-track); border: 1px solid var(--line-2); position: relative; }
+.switch i { position: absolute; top: 2px; left: 2px; width: 21px; height: 21px; border-radius: 50%; background: var(--bg); box-shadow: var(--shadow-sm); transition: transform 0.2s var(--ease); }
+.switch.on { background: var(--accent); border-color: var(--accent); }
+.switch.on i { transform: translateX(19px); }
+
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 680px) { .voice-grid { grid-template-columns: 1fr; } }
+.voice .card h4 { font-family: var(--serif); font-weight: 500; font-size: var(--t-h3); margin-bottom: 6px; }
+.voice .card p { font-size: var(--t-sm); color: var(--ink-2); }
+.voice .card .say { font-size: var(--t-sm); margin-top: 12px; line-height: 1.7; }
+.voice .card .say .y { color: var(--ink); } .voice .card .say .y::before { content: "Yes: "; color: var(--accent-strong); font-family: var(--mono); font-size: var(--t-xs); }
+.voice .card .say .n { color: var(--ink-3); } .voice .card .say .n::before { content: "No: "; font-family: var(--mono); font-size: var(--t-xs); }
+</style>
+</head>
+<body>
+<div class="bg-wrap">
+  <nav class="toc">
+    <a class="logo" href="index.html">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path class="arc-off" d="M12 3 A 9 9 0 0 0 12 21" /><path class="arc-enh" d="M12 3 A 9 9 0 0 1 12 21" /><circle class="pip" cx="12" cy="3" r="2.4" />
+      </svg>
+      <span class="word">Centaur</span>
+    </a>
+    <a href="#logo"><span class="num">01</span>Logo and mark</a>
+    <a href="#color"><span class="num">02</span>Color</a>
+    <a href="#type"><span class="num">03</span>Typography</a>
+    <a href="#cats"><span class="num">04</span>The categories</a>
+    <a href="#drift"><span class="num">05</span>Drift indicator</a>
+    <a href="#components"><span class="num">06</span>Components</a>
+    <a href="#voice"><span class="num">07</span>Voice</a>
+    <a class="back" href="index.html">Back to site</a>
+  </nav>
+
+  <div class="doc">
+    <section class="bg-sec cover">
+      <span class="sec-num">Centaur · Brand guide · v1.1 · 2026</span>
+      <div class="mega">Centaur</div>
+      <p class="tagline">The instrument for judgment.</p>
+      <div class="meta">
+        <span><b>Archetype</b> · Sage and Magician</span>
+        <span><b>Scores</b> · Competence, Sophistication</span>
+        <span><b>Feel</b> · precision instrument, with consumer restraint</span>
+      </div>
+    </section>
+
+    <!-- 01 LOGO -->
+    <section class="bg-sec" id="logo">
+      <span class="sec-num">01</span>
+      <h2>Logo and <em>mark</em></h2>
+      <p class="intro">The wordmark is Newsreader Medium. The mark is a reading instrument: an ink ring with a single accent pip, a value resting on a dial. It states what the product is without illustration or cliche.</p>
+
+      <div class="logo-row">
+        <div class="logo-tile light"><div>
+          <div class="logo"><svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="arc-off" d="M12 3 A 9 9 0 0 0 12 21" /><path class="arc-enh" d="M12 3 A 9 9 0 0 1 12 21" /><circle class="pip" cx="12" cy="3" r="2.4" /></svg><span class="word">Centaur</span></div>
+          <p class="cap u-center">Primary, on light</p>
+        </div></div>
+        <div class="logo-tile dark"><div>
+          <div class="logo"><svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="arc-off" d="M12 3 A 9 9 0 0 0 12 21" /><path class="arc-enh" d="M12 3 A 9 9 0 0 1 12 21" /><circle class="pip" cx="12" cy="3" r="2.4" /></svg><span class="word">Centaur</span></div>
+          <p class="cap u-center" style="color:var(--on-night-3)">Reversed, on night</p>
+        </div></div>
+      </div>
+
+      <div class="sub">The mark, up close</div>
+      <div class="mark-detail">
+        <svg class="mark mark-big" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path class="arc-off" d="M12 3 A 9 9 0 0 0 12 21" /><path class="arc-enh" d="M12 3 A 9 9 0 0 1 12 21" /><circle class="pip" cx="12" cy="3" r="2.4" /></svg>
+        <div class="mark-notes">
+          <p>The <b>ring</b> is a single ink stroke (the two halves of the path close into one continuous circle). It is the floor of the brand, drawn in nothing but ink.</p>
+          <p>The <span class="lg">pip</span> is the one piece of accent in the whole mark. It marks a reading on the dial, which is the only job the accent ever has.</p>
+          <p>Minimum clear space equals the wordmark cap height on all sides. Do not recolor the ring, fill the pip with anything but the accent, rotate the mark, or add effects.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 COLOR -->
+    <section class="bg-sec" id="color">
+      <span class="sec-num">02</span>
+      <h2>Color</h2>
+      <p class="intro">A two color floor carries the entire interface: cool paper and cool ink. One accent sits on top of that floor, and it is rationed. The accent appears only where something changes state: a reading, a focus ring, the primary action, an active toggle. It is never decoration.</p>
+
+      <div class="sub">The floor, paper and ink</div>
+      <div class="swatches">
+        <div class="sw-card"><div class="sw-chip" style="background:var(--bg)"></div><div class="sw-body"><div class="sw-name">Paper</div><div class="sw-tok">--bg · oklch(.985 .004 255)</div><div class="sw-role">Page</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--surface)"></div><div class="sw-body"><div class="sw-name">Surface</div><div class="sw-tok">--surface · oklch(.968 .005 255)</div><div class="sw-role">Cards, panels</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--ink-2)"></div><div class="sw-body"><div class="sw-name">Ink 2</div><div class="sw-tok">--ink-2 · oklch(.43 .02 265)</div><div class="sw-role">Secondary text</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--ink)"></div><div class="sw-body"><div class="sw-name">Ink</div><div class="sw-tok">--ink · oklch(.205 .022 265)</div><div class="sw-role">Primary text</div></div></div>
+      </div>
+
+      <div class="sub">Night, the instrument surface</div>
+      <div class="swatches">
+        <div class="sw-card"><div class="sw-chip" style="background:var(--night)"></div><div class="sw-body"><div class="sw-name">Night</div><div class="sw-tok">--night · oklch(.205 .028 265)</div><div class="sw-role">Dark surface (used sparingly)</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--scale-track)"></div><div class="sw-body"><div class="sw-name">Scale track</div><div class="sw-tok">--scale-track</div><div class="sw-role">The instrument track</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--line)"></div><div class="sw-body"><div class="sw-name">Line</div><div class="sw-tok">--line · oklch(.895 .008 255)</div><div class="sw-role">Hairlines</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--ink-3)"></div><div class="sw-body"><div class="sw-name">Ink 3</div><div class="sw-tok">--ink-3 · oklch(.585 .016 265)</div><div class="sw-role">Captions, labels</div></div></div>
+      </div>
+
+      <div class="sub">The one accent</div>
+      <div class="swatches">
+        <div class="sw-card"><div class="sw-chip" style="background:var(--accent)"></div><div class="sw-body"><div class="sw-name">Accent</div><div class="sw-tok">--accent · oklch(.585 .165 268)</div><div class="sw-role">State changes only</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--accent-strong)"></div><div class="sw-body"><div class="sw-name">Accent strong</div><div class="sw-tok">--accent-strong</div><div class="sw-role">Hover, pressed</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--accent-tint)"></div><div class="sw-body"><div class="sw-name">Accent tint</div><div class="sw-tok">--accent-tint</div><div class="sw-role">Focus halo, fills</div></div></div>
+        <div class="sw-card"><div class="sw-chip" style="background:var(--accent-lit)"></div><div class="sw-body"><div class="sw-name">Accent lit</div><div class="sw-tok">--accent-lit</div><div class="sw-role">Accent on night</div></div></div>
+      </div>
+      <p class="note"><b>No traffic lights.</b> Direct, Delegate, and Defer are never coded green, amber, or red. They are told apart by form and weight (where the reading sits on the scale), so the distinction survives for anyone who cannot rely on color. Centaur reports a measurement; it does not flag a winner.</p>
+    </section>
+
+    <!-- 03 TYPE -->
+    <section class="bg-sec" id="type">
+      <span class="sec-num">03</span>
+      <h2>Typography</h2>
+      <p class="intro">One workhorse sans for the interface, one display serif for the moments that matter (the verdict, the drift number), and a mono for the readings and labels that make the product feel like an instrument. No script, no decoration.</p>
+
+      <div class="type-fam">
+        <div class="tf-meta"><div class="nm">Newsreader</div><div class="role">Display, the moments that matter</div></div>
+        <div class="tf-spec"><div class="big serif" style="font-size:3.2rem">Defer</div><div class="row">400 and 500, plus italics. Verdict, drift number, headlines.</div></div>
+      </div>
+      <div class="type-fam">
+        <div class="tf-meta"><div class="nm">Hanken Grotesk</div><div class="role">Workhorse, the interface</div></div>
+        <div class="tf-spec"><div class="big" style="font-size:2.2rem;font-weight:500">What were you about to hand to AI?</div><div class="row">400, 500, 600, 700. Body, controls, evidence.</div></div>
+      </div>
+      <div class="type-fam">
+        <div class="tf-meta"><div class="nm">IBM Plex Mono</div><div class="role">Instrument, readings and labels</div></div>
+        <div class="tf-spec"><div class="big mono" style="font-size:1.8rem">EVIDENCE / DRIFT INDICATOR</div><div class="row">400 and 500. Kickers, metadata, timestamps.</div></div>
+      </div>
+
+      <div class="sub">Scale</div>
+      <div class="scale-list">
+        <div class="scale-item"><span class="tag">Display</span><span class="ex serif" style="font-size:2.4rem">The verdict and the drift number</span></div>
+        <div class="scale-item"><span class="tag">H1</span><span class="ex serif" style="font-size:1.9rem">Three ways to hand work to AI</span></div>
+        <div class="scale-item"><span class="tag">Lead</span><span class="ex" style="font-size:1.2rem;color:var(--ink-2)">Centaur reads who kept the thinking.</span></div>
+        <div class="scale-item"><span class="tag">Body</span><span class="ex" style="color:var(--ink-2)">The evidence behind every reading, in plain language.</span></div>
+        <div class="scale-item"><span class="tag">Mono label</span><span class="ex mono" style="font-size:.85rem;color:var(--ink-3)">A WAY TO KEEP MORE OF THE THINKING</span></div>
+      </div>
+    </section>
+
+    <!-- 04 CATEGORIES -->
+    <section class="bg-sec" id="cats">
+      <span class="sec-num">04</span>
+      <h2>The <em>categories</em></h2>
+      <p class="intro">Every handoff is read as one of three named choices. They sit on a single axis: how much of the thinking the person keeps. The reading is a position and a weight, never a color. A Defer is a measurement, not a moral failure; deferring is sometimes the right call.</p>
+
+      <div class="cat-demo">
+        <div class="cat-poles"><span>You hold the thinking</span><span>AI holds the thinking</span></div>
+        <div class="cat-track">
+          <i class="notch" style="left:16%"></i><i class="notch" style="left:50%"></i><i class="notch" style="left:84%"></i>
+          <i class="weight" style="left:84%"></i>
+        </div>
+        <div class="cat-ticks"><span style="left:16%">Direct</span><span style="left:50%">Delegate</span><span style="left:84%">Defer</span></div>
+      </div>
+
+      <div class="cat-defs">
+        <div class="cat-def"><div class="mini"><i class="mt"></i><i class="mw" style="left:16%"></i></div><h4>Direct</h4><p>You hold the thinking. The AI is a sounding board; the judgment stays with you.</p></div>
+        <div class="cat-def"><div class="mini"><i class="mt"></i><i class="mw" style="left:50%"></i></div><h4>Delegate</h4><p>You hand over a bounded outcome and inspect the result. The thinking is shared; you still check the work.</p></div>
+        <div class="cat-def"><div class="mini"><i class="mt"></i><i class="mw" style="left:84%"></i></div><h4>Defer</h4><p>You outsource the judgment itself. The AI decides; you accept.</p></div>
+      </div>
+    </section>
+
+    <!-- 05 DRIFT -->
+    <section class="bg-sec" id="drift">
+      <span class="sec-num">05</span>
+      <h2>Drift indicator</h2>
+      <p class="intro">On the History screen, one card outranks everything else: a single number and one plain sentence that states what the number is. It is a measurement, not a guilt trip. The user can turn it off at any time and the product keeps classifying and logging.</p>
+      <div class="drift-demo">
+        <p class="k">Drift indicator</p>
+        <div class="n">34%</div>
+        <p class="s">34% of your last 50 handoffs were Defers.</p>
+      </div>
+    </section>
+
+    <!-- 06 COMPONENTS -->
+    <section class="bg-sec" id="components">
+      <span class="sec-num">06</span>
+      <h2>Components</h2>
+      <p class="intro">A small, sturdy kit. Pill buttons, hairline surfaces, mono labels, one text field, one toggle, and the scale that reads every handoff.</p>
+
+      <div class="comp">
+        <div class="lbl">Buttons</div>
+        <div class="row">
+          <a class="btn btn-primary">Classify this handoff</a>
+          <a class="btn btn-ghost">Mark this classification as wrong</a>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="lbl">Field and toggle</div>
+        <div class="row" style="gap:32px">
+          <div class="field"><label>The task you were about to hand off</label><input type="text" placeholder="Decide which vendor we should sign." /></div>
+          <label style="display:flex;align-items:center;gap:12px"><span style="font-size:var(--t-sm);color:var(--ink-2);font-weight:500">Show drift indicator</span><span class="switch on"><i></i></span></label>
+        </div>
+      </div>
+      <div class="comp">
+        <div class="lbl">Reading chips (neutral; accent only when active)</div>
+        <div class="row">
+          <span class="chip"><span class="dot"></span>Direct</span>
+          <span class="chip"><span class="dot"></span>Delegate</span>
+          <span class="chip active"><span class="dot"></span>Defer, active</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 VOICE -->
+    <section class="bg-sec voice" id="voice">
+      <span class="sec-num">07</span>
+      <h2>Voice</h2>
+      <p class="intro">Sharp, dry, specific. Centaur talks like a competent colleague telling you the truth, not a coach welcoming you to an app. It never flatters and never scolds. No motivational language, no exclamation points, no em dashes or en dashes.</p>
+      <div class="voice-grid">
+        <div class="card"><h4>Report, do not scold</h4><p>State the reading and trust the user to act.</p><p class="say"><span class="y">You deferred this one.</span><br /><span class="n">You gave up your thinking.</span></p></div>
+        <div class="card"><h4>Suggest, do not command</h4><p>Corrective actions are options, not orders.</p><p class="say"><span class="y">You could hold the framing yourself and use the AI to pressure test it.</span><br /><span class="n">Do not defer this.</span></p></div>
+        <div class="card"><h4>Measure, do not moralize</h4><p>A Defer is a position on a scale, not a verdict on the person.</p><p class="say"><span class="y">34% of your handoffs were Defers.</span><br /><span class="n">You are becoming dependent on AI.</span></p></div>
+        <div class="card"><h4>Private by default</h4><p>Reassure plainly: local only, patterns not keystrokes.</p><p class="say"><span class="y">Logged locally. Nothing left this device.</span><br /><span class="n">We monitor everything you type.</span></p></div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+    <p class="cap" style="padding:24px 0 40px">Centaur · Brand guide v1.1 · Tokens live in <span class="mono">assets/centaur.css</span> · © 2026 Centaur, Inc.</p>
+  </div>
+</div>
+
+<script>
+var secs = [].slice.call(document.querySelectorAll('.bg-sec[id]'));
+var links = {};
+[].slice.call(document.querySelectorAll('.toc a[href^="#"]')).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+var spy = new IntersectionObserver(function (es) {
+  es.forEach(function (e) { if (e.isIntersecting) { for (var k in links) links[k].classList.remove('on'); if (links[e.target.id]) links[e.target.id].classList.add('on'); } });
+}, { rootMargin: '-20% 0px -70% 0px' });
+secs.forEach(function (s) { spy.observe(s); });
+</script>
+</body>
+</html>
